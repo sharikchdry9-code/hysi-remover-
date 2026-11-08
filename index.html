@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V-Remover Pro | Precise Watermark Remover</title>
+    <title>HYSI REMOVER | Ultimate Photo & Video Watermark Eraser</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -26,84 +26,96 @@
             cursor: crosshair;
         }
         .btn-glow {
-            box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 0 18px rgba(99, 102, 241, 0.4);
         }
         .btn-glow:hover {
-            box-shadow: 0 0 25px rgba(99, 102, 241, 0.7);
+            box-shadow: 0 0 28px rgba(99, 102, 241, 0.7);
         }
     </style>
 </head>
 <body class="bg-gray-950 text-white min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
 
     <!-- Header -->
-    <header class="border-b border-gray-800 bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between">
+    <header class="border-b border-gray-800 bg-gray-900/90 backdrop-blur-md sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between">
         <div class="flex items-center space-x-3">
-            <!-- Scissor Logo Icon -->
             <div class="bg-gradient-to-tr from-indigo-600 to-violet-500 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/30 flex items-center justify-center">
                 <i class="fa-solid fa-scissors text-2xl -rotate-45"></i>
             </div>
             <div>
                 <div class="flex items-center gap-2">
-                    <h1 class="text-xl font-extrabold tracking-wide bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">V-REMOVER</h1>
-                    <span class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">PRO HD</span>
+                    <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">HYSI REMOVER</h1>
+                    <span class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">PRO HD</span>
                 </div>
-                <p class="text-xs text-gray-400">Targeted Photo & Video Watermark Eraser</p>
+                <p class="text-xs text-gray-400">Clean Photo & Video Watermark Eraser</p>
             </div>
         </div>
 
         <div class="flex items-center gap-3">
             <div class="hidden sm:flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-3 py-1.5 rounded-full">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free • No Login • HD Export
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free • No Login
             </div>
         </div>
     </header>
 
-    <!-- Main Workspace -->
+    <!-- Main Content -->
     <main class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 max-w-6xl w-full mx-auto">
 
-        <!-- Upload Box -->
-        <div id="uploadSection" class="w-full max-w-xl border-2 border-dashed border-gray-700 hover:border-indigo-500 rounded-3xl p-10 text-center bg-gray-900/50 backdrop-blur-xl transition-all duration-300 shadow-2xl cursor-pointer">
-            <input type="file" id="fileInput" accept="image/*,video/*" class="hidden">
-            <label for="fileInput" class="cursor-pointer flex flex-col items-center">
-                <div class="w-20 h-20 bg-indigo-600/15 border border-indigo-500/30 text-indigo-400 rounded-2xl flex items-center justify-center mb-5 shadow-inner group">
-                    <i class="fa-solid fa-scissors text-4xl -rotate-45 text-indigo-400 group-hover:scale-110 transition-transform"></i>
-                </div>
-                <h2 class="text-xl font-bold mb-2">Photo ya Video File Choose Karein</h2>
-                <p class="text-sm text-gray-400 mb-6 max-w-xs">CapCut, Logo, Text ya Kisi bhi Watermark ko bilkul clean hatayein</p>
-                <span class="btn-glow bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm px-7 py-3 rounded-xl transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-folder-open"></i> Select File (HD Quality)
-                </span>
-            </label>
+        <!-- Mode Selector & Upload Box -->
+        <div id="uploadSection" class="w-full max-w-xl flex flex-col items-center">
+            
+            <!-- Mode Toggle Tabs -->
+            <div class="flex bg-gray-900 border border-gray-800 p-1.5 rounded-2xl mb-6 w-full max-w-md">
+                <button id="tabVideo" class="flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 bg-indigo-600 text-white transition-all">
+                    <i class="fa-solid fa-video"></i> Video Remover
+                </button>
+                <button id="tabPhoto" class="flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all">
+                    <i class="fa-solid fa-image"></i> Photo Remover
+                </button>
+            </div>
+
+            <!-- Upload Zone -->
+            <div class="w-full border-2 border-dashed border-gray-700 hover:border-indigo-500 rounded-3xl p-10 text-center bg-gray-900/50 backdrop-blur-xl transition-all duration-300 shadow-2xl cursor-pointer">
+                <input type="file" id="fileInput" accept="video/*" class="hidden">
+                <label for="fileInput" class="cursor-pointer flex flex-col items-center">
+                    <div class="w-20 h-20 bg-indigo-600/15 border border-indigo-500/30 text-indigo-400 rounded-2xl flex items-center justify-center mb-5 shadow-inner group">
+                        <i class="fa-solid fa-scissors text-4xl -rotate-45 text-indigo-400 group-hover:scale-110 transition-transform"></i>
+                    </div>
+                    <h2 id="uploadTitle" class="text-xl font-bold mb-2">Video Choose Karein</h2>
+                    <p id="uploadSub" class="text-sm text-gray-400 mb-6 max-w-xs">CapCut, Logo ya Text ko bilkul saaf hatayein (MP4, WebM)</p>
+                    <span class="btn-glow bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm px-7 py-3 rounded-xl transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open"></i> Select File
+                    </span>
+                </label>
+            </div>
         </div>
 
         <!-- Editor Viewport -->
         <div id="workspaceSection" class="hidden w-full flex flex-col items-center space-y-4">
             
-            <!-- Floating Control Bar -->
+            <!-- Toolbar -->
             <div class="bg-gray-900/90 border border-gray-800 backdrop-blur-md rounded-2xl p-3 flex flex-wrap items-center justify-between gap-4 w-full shadow-xl">
                 
-                <!-- Brush controls -->
+                <!-- Brush Size -->
                 <div class="flex items-center space-x-3">
-                    <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Pen Tool:</span>
+                    <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Brush:</span>
                     <div class="flex items-center gap-2 bg-gray-950 border border-gray-800 px-3 py-1.5 rounded-xl">
                         <i class="fa-solid fa-paint-brush text-xs text-indigo-400"></i>
-                        <span class="text-xs text-gray-300">Size:</span>
-                        <input type="range" id="brushSize" min="4" max="100" value="25" class="w-24 accent-indigo-500 cursor-pointer">
+                        <input type="range" id="brushSize" min="5" max="90" value="25" class="w-24 accent-indigo-500 cursor-pointer">
                         <span id="brushSizeVal" class="text-xs w-7 text-indigo-300 font-mono">25px</span>
                     </div>
                     <button id="clearMaskBtn" class="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3.5 py-2 rounded-xl transition text-gray-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-rotate-left"></i> Reset Mask
+                        <i class="fa-solid fa-rotate-left"></i> Reset Selection
                     </button>
                 </div>
 
-                <!-- Action controls -->
+                <!-- Action Controls -->
                 <div class="flex items-center space-x-3">
                     <button id="removeBtn" class="flex items-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-rose-950/40 transition-all active:scale-95">
-                        <i class="fa-solid fa-scissors"></i> Remove Watermark
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Clean Watermark
                     </button>
 
-                    <button id="downloadBtn" class="hidden flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-emerald-950/40 transition-all active:scale-95">
-                        <i class="fa-solid fa-download"></i> Download HD
+                    <button id="nextDownloadBtn" class="hidden flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-indigo-950/40 transition-all active:scale-95">
+                        <i class="fa-solid fa-arrow-right"></i> Next: Export Quality
                     </button>
 
                     <button id="resetBtn" class="text-xs text-gray-400 hover:text-white px-2 py-1 flex items-center gap-1">
@@ -122,21 +134,52 @@
 
             <div class="flex items-center gap-2 text-xs text-gray-400 bg-gray-900/60 px-4 py-2 rounded-full border border-gray-800">
                 <i class="fa-solid fa-circle-info text-indigo-400"></i>
-                <span>Bas CapCut/Watermark ke <b>sirf upar</b> red paint karein, poori screen blur nahi hogi.</span>
+                <span>Jahan CapCut ya text likha hai, <b>exact uspar red paint karein</b>. Fir Clean Watermark dabayein.</span>
             </div>
         </div>
 
     </main>
 
+    <!-- Download Quality Modal -->
+    <div id="qualityModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-md w-full text-center space-y-5 shadow-2xl">
+            <div class="w-14 h-14 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-download"></i>
+            </div>
+            <div>
+                <h3 class="text-xl font-bold">Select Export Quality</h3>
+                <p class="text-xs text-gray-400 mt-1">Apne hisab se resolution select karke download karein</p>
+            </div>
+
+            <div class="space-y-3 pt-2">
+                <button id="dlHdBtn" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-between transition-all shadow-lg shadow-emerald-950/40">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> Full HD Quality (Original)</span>
+                    <span class="text-xs bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-700">1080p</span>
+                </button>
+
+                <button id="dlLowBtn" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3 px-4 rounded-xl flex items-center justify-between transition-all border border-gray-700">
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Fast Download (Low Quality)</span>
+                    <span class="text-xs bg-gray-900 px-2.5 py-1 rounded-md border border-gray-700 text-gray-400">480p / Small</span>
+                </button>
+            </div>
+
+            <button id="closeModalBtn" class="text-xs text-gray-400 hover:text-white pt-2">Cancel</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-gray-900 py-4 text-center text-xs text-gray-500">
-        V-Remover Pro • Free Client-Side Targeted Watermark Eraser
+        HYSI REMOVER • High-Precision Photo & Video Watermark Eraser
     </footer>
 
     <script>
+        const tabVideo = document.getElementById('tabVideo');
+        const tabPhoto = document.getElementById('tabPhoto');
         const fileInput = document.getElementById('fileInput');
         const uploadSection = document.getElementById('uploadSection');
         const workspaceSection = document.getElementById('workspaceSection');
+        const uploadTitle = document.getElementById('uploadTitle');
+        const uploadSub = document.getElementById('uploadSub');
         
         const mainCanvas = document.getElementById('mainCanvas');
         const maskCanvas = document.getElementById('maskCanvas');
@@ -147,16 +190,39 @@
         const brushSizeVal = document.getElementById('brushSizeVal');
         const clearMaskBtn = document.getElementById('clearMaskBtn');
         const removeBtn = document.getElementById('removeBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
+        const nextDownloadBtn = document.getElementById('nextDownloadBtn');
         const resetBtn = document.getElementById('resetBtn');
 
-        let fileType = '';
+        const qualityModal = document.getElementById('qualityModal');
+        const dlHdBtn = document.getElementById('dlHdBtn');
+        const dlLowBtn = document.getElementById('dlLowBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        let mode = 'video'; // 'video' or 'photo'
         let currentImage = null;
         let videoElement = null;
         let isDrawing = false;
         let animFrameId = null;
+        let maskBounds = null;
 
-        let maskBounds = null; // Stores exact drawn bounding box coordinates {minX, minY, maxX, maxY}
+        // Mode Switching
+        tabVideo.addEventListener('click', () => {
+            mode = 'video';
+            tabVideo.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 bg-indigo-600 text-white transition-all';
+            tabPhoto.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all';
+            fileInput.accept = 'video/*';
+            uploadTitle.innerText = 'Video Choose Karein';
+            uploadSub.innerText = 'CapCut, Logo ya Text ko bilkul saaf hatayein (MP4, WebM)';
+        });
+
+        tabPhoto.addEventListener('click', () => {
+            mode = 'photo';
+            tabPhoto.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 bg-indigo-600 text-white transition-all';
+            tabVideo.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all';
+            fileInput.accept = 'image/*';
+            uploadTitle.innerText = 'Photo Choose Karein';
+            uploadSub.innerText = 'Photo me se kisi bhi watermark ya text ko saaf karein (JPG, PNG)';
+        });
 
         brushSizeInput.addEventListener('input', (e) => {
             brushSizeVal.innerText = `${e.target.value}px`;
@@ -170,11 +236,10 @@
 
             uploadSection.classList.add('hidden');
             workspaceSection.classList.remove('hidden');
-            downloadBtn.classList.add('hidden');
+            nextDownloadBtn.classList.add('hidden');
             maskBounds = null;
 
-            if (file.type.startsWith('image/')) {
-                fileType = 'image';
+            if (mode === 'photo') {
                 const reader = new FileReader();
                 reader.onload = (evt) => {
                     currentImage = new Image();
@@ -185,8 +250,7 @@
                     currentImage.src = evt.target.result;
                 };
                 reader.readAsDataURL(file);
-            } else if (file.type.startsWith('video/')) {
-                fileType = 'video';
+            } else {
                 if (videoElement) {
                     videoElement.pause();
                     videoElement.remove();
@@ -200,20 +264,19 @@
                 videoElement.onloadedmetadata = () => {
                     setupCanvas(videoElement.videoWidth, videoElement.videoHeight);
                     videoElement.play();
-                    startNormalVideoLoop();
+                    startVideoLoop();
                 };
             }
         }
 
-        function setupCanvas(width, height) {
-            const maxDim = 1920; // HD quality limit
+        function setupCanvas(w, h) {
+            const maxDim = 1920;
             let scale = 1;
-            if (width > maxDim || height > maxDim) {
-                scale = Math.min(maxDim / width, maxDim / height);
+            if (w > maxDim || h > maxDim) {
+                scale = Math.min(maxDim / w, maxDim / h);
             }
-
-            const finalW = Math.round(width * scale);
-            const finalH = Math.round(height * scale);
+            const finalW = Math.round(w * scale);
+            const finalH = Math.round(h * scale);
 
             mainCanvas.width = finalW;
             mainCanvas.height = finalH;
@@ -223,10 +286,10 @@
             maskCtx.clearRect(0, 0, finalW, finalH);
         }
 
-        function startNormalVideoLoop() {
+        function startVideoLoop() {
             if (animFrameId) cancelAnimationFrame(animFrameId);
             function loop() {
-                if (fileType === 'video' && videoElement && !videoElement.paused) {
+                if (mode === 'video' && videoElement && !videoElement.paused) {
                     mainCtx.drawImage(videoElement, 0, 0, mainCanvas.width, mainCanvas.height);
                     animFrameId = requestAnimationFrame(loop);
                 }
@@ -273,7 +336,7 @@
 
         function draw(e) {
             const pos = getCanvasCoords(e);
-            maskCtx.fillStyle = 'rgba(239, 68, 68, 0.7)';
+            maskCtx.fillStyle = 'rgba(239, 68, 68, 0.75)';
             maskCtx.beginPath();
             maskCtx.arc(pos.x, pos.y, brushSizeInput.value / 2, 0, Math.PI * 2);
             maskCtx.fill();
@@ -293,22 +356,23 @@
             workspaceSection.classList.add('hidden');
         });
 
+        // REMOVAL PROCESS
         removeBtn.addEventListener('click', () => {
             if (!maskBounds) {
-                alert('Pehle watermark par pen se mark karein!');
+                alert('Pehle text ya watermark par red color se paint karein!');
                 return;
             }
 
-            if (fileType === 'image') {
-                processPreciseImageRemoval();
-            } else if (fileType === 'video') {
-                processPreciseVideoRemoval();
+            if (mode === 'photo') {
+                cleanPhotoWatermark();
+            } else {
+                cleanVideoWatermark();
             }
-            downloadBtn.classList.remove('hidden');
+            nextDownloadBtn.classList.remove('hidden');
         });
 
-        // PHOTO LOCALIZED INPAINTING
-        function processPreciseImageRemoval() {
+        // 1. Full Photo Erase Algorithm
+        function cleanPhotoWatermark() {
             const w = mainCanvas.width;
             const h = mainCanvas.height;
 
@@ -323,25 +387,22 @@
 
             const mainData = mainCtx.getImageData(bx1, by1, bw, bh);
             const maskData = maskCtx.getImageData(bx1, by1, bw, bh);
-
             const src = mainData.data;
             const mask = maskData.data;
 
-            for (let pass = 0; pass < 5; pass++) {
+            // Inpainting synthesis pass (Pixel Replacement)
+            for (let pass = 0; pass < 8; pass++) {
                 for (let y = 1; y < bh - 1; y++) {
                     for (let x = 1; x < bw - 1; x++) {
                         const idx = (y * bw + x) * 4;
                         if (mask[idx + 3] > 0) {
                             let rSum = 0, gSum = 0, bSum = 0, count = 0;
-                            const neighbors = [
-                                [-1, 0], [1, 0], [0, -1], [0, 1],
-                                [-1, -1], [1, -1], [-1, 1], [1, 1]
-                            ];
-                            for (let n of neighbors) {
-                                const nx = x + n[0];
-                                const ny = y + n[1];
+                            const n = [[-1,0],[1,0],[0,-1],[0,1],[-1,-1],[1,-1],[-1,1],[1,1]];
+                            for (let neighbor of n) {
+                                const nx = x + neighbor[0];
+                                const ny = y + neighbor[1];
                                 const nIdx = (ny * bw + nx) * 4;
-                                if (mask[nIdx + 3] === 0 || pass > 1) {
+                                if (mask[nIdx + 3] === 0 || pass > 2) {
                                     rSum += src[nIdx];
                                     gSum += src[nIdx + 1];
                                     bSum += src[nIdx + 2];
@@ -357,14 +418,12 @@
                     }
                 }
             }
-
             mainCtx.putImageData(mainData, bx1, by1);
             maskCtx.clearRect(0, 0, w, h);
-            maskBounds = null;
         }
 
-        // VIDEO TARGETED LOCAL INPAINTING
-        function processPreciseVideoRemoval() {
+        // 2. Full Video Erase Patch Algorithm
+        function cleanVideoWatermark() {
             if (animFrameId) cancelAnimationFrame(animFrameId);
 
             const w = mainCanvas.width;
@@ -381,31 +440,57 @@
             patchCanvas.height = bh;
             const patchCtx = patchCanvas.getContext('2d');
 
-            function renderTargetedVideo() {
-                if (fileType === 'video' && videoElement && !videoElement.paused) {
+            function renderCleanVideo() {
+                if (mode === 'video' && videoElement && !videoElement.paused) {
                     mainCtx.drawImage(videoElement, 0, 0, w, h);
 
+                    // Crop exact painted area and apply dynamic pixel patch blending
                     patchCtx.drawImage(videoElement, bx1, by1, bw, bh, 0, 0, bw, bh);
-                    patchCtx.filter = 'blur(10px) contrast(110%)';
+                    patchCtx.filter = 'blur(16px) contrast(120%)';
                     patchCtx.drawImage(patchCanvas, 0, 0);
                     patchCtx.filter = 'none';
 
                     mainCtx.drawImage(patchCanvas, bx1, by1, bw, bh);
-
-                    animFrameId = requestAnimationFrame(renderTargetedVideo);
+                    animFrameId = requestAnimationFrame(renderCleanVideo);
                 }
             }
-
-            renderTargetedVideo();
+            renderCleanVideo();
             maskCtx.clearRect(0, 0, w, h);
         }
 
-        downloadBtn.addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.download = `V-Remover-HD.png`;
-            link.href = mainCanvas.toDataURL('image/png', 1.0);
-            link.click();
+        // EXPORT & DOWNLOAD MODAL
+        nextDownloadBtn.addEventListener('click', () => {
+            qualityModal.classList.remove('hidden');
         });
+
+        closeModalBtn.addEventListener('click', () => {
+            qualityModal.classList.add('hidden');
+        });
+
+        dlHdBtn.addEventListener('click', () => downloadResult(1.0));
+        dlLowBtn.addEventListener('click', () => downloadResult(0.5));
+
+        function downloadResult(qualityRatio) {
+            qualityModal.classList.add('hidden');
+            const link = document.createElement('a');
+
+            if (qualityRatio < 1.0) {
+                // Low Quality resize canvas export
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = Math.round(mainCanvas.width * qualityRatio);
+                tempCanvas.height = Math.round(mainCanvas.height * qualityRatio);
+                const tempCtx = tempCanvas.getContext('2d');
+                tempCtx.drawImage(mainCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
+                
+                link.download = `HYSI-REMOVER-Fast.${mode === 'photo' ? 'jpg' : 'png'}`;
+                link.href = tempCanvas.toDataURL('image/jpeg', 0.6);
+            } else {
+                // Full HD Original Export
+                link.download = `HYSI-REMOVER-FullHD.${mode === 'photo' ? 'png' : 'png'}`;
+                link.href = mainCanvas.toDataURL('image/png', 1.0);
+            }
+            link.click();
+        }
     </script>
 </body>
 </html>
