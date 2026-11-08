@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HYSI REMOVER | Ultimate Photo & Video Watermark Eraser</title>
+    <title>HYSI REMOVER | Smart Clone Patch Watermark Eraser</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -44,15 +44,15 @@
             <div>
                 <div class="flex items-center gap-2">
                     <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">HYSI REMOVER</h1>
-                    <span class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">PRO HD</span>
+                    <span class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">CLONE PRO HD</span>
                 </div>
-                <p class="text-xs text-gray-400">Clean Photo & Video Watermark Eraser</p>
+                <p class="text-xs text-gray-400">100% Seamless Watermark & Text Removal</p>
             </div>
         </div>
 
         <div class="flex items-center gap-3">
             <div class="hidden sm:flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-3 py-1.5 rounded-full">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> 100% Free • No Login
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Free • No Login
             </div>
         </div>
     </header>
@@ -60,10 +60,9 @@
     <!-- Main Content -->
     <main class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 max-w-6xl w-full mx-auto">
 
-        <!-- Mode Selector & Upload Box -->
+        <!-- Mode & Upload -->
         <div id="uploadSection" class="w-full max-w-xl flex flex-col items-center">
             
-            <!-- Mode Toggle Tabs -->
             <div class="flex bg-gray-900 border border-gray-800 p-1.5 rounded-2xl mb-6 w-full max-w-md">
                 <button id="tabVideo" class="flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 bg-indigo-600 text-white transition-all">
                     <i class="fa-solid fa-video"></i> Video Remover
@@ -73,7 +72,6 @@
                 </button>
             </div>
 
-            <!-- Upload Zone -->
             <div class="w-full border-2 border-dashed border-gray-700 hover:border-indigo-500 rounded-3xl p-10 text-center bg-gray-900/50 backdrop-blur-xl transition-all duration-300 shadow-2xl cursor-pointer">
                 <input type="file" id="fileInput" accept="video/*" class="hidden">
                 <label for="fileInput" class="cursor-pointer flex flex-col items-center">
@@ -81,7 +79,7 @@
                         <i class="fa-solid fa-scissors text-4xl -rotate-45 text-indigo-400 group-hover:scale-110 transition-transform"></i>
                     </div>
                     <h2 id="uploadTitle" class="text-xl font-bold mb-2">Video Choose Karein</h2>
-                    <p id="uploadSub" class="text-sm text-gray-400 mb-6 max-w-xs">CapCut, Logo ya Text ko bilkul saaf hatayein (MP4, WebM)</p>
+                    <p id="uploadSub" class="text-sm text-gray-400 mb-6 max-w-xs">CapCut, Logo ya Text ko bilkul 100% saaf karein</p>
                     <span class="btn-glow bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm px-7 py-3 rounded-xl transition-all flex items-center gap-2">
                         <i class="fa-solid fa-folder-open"></i> Select File
                     </span>
@@ -95,7 +93,7 @@
             <!-- Toolbar -->
             <div class="bg-gray-900/90 border border-gray-800 backdrop-blur-md rounded-2xl p-3 flex flex-wrap items-center justify-between gap-4 w-full shadow-xl">
                 
-                <!-- Brush Size -->
+                <!-- Tools -->
                 <div class="flex items-center space-x-3">
                     <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Brush:</span>
                     <div class="flex items-center gap-2 bg-gray-950 border border-gray-800 px-3 py-1.5 rounded-xl">
@@ -111,7 +109,7 @@
                 <!-- Action Controls -->
                 <div class="flex items-center space-x-3">
                     <button id="removeBtn" class="flex items-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-rose-950/40 transition-all active:scale-95">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Clean Watermark
+                        <i class="fa-solid fa-scissors"></i> 100% Clean Remove
                     </button>
 
                     <button id="nextDownloadBtn" class="hidden flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-indigo-950/40 transition-all active:scale-95">
@@ -124,7 +122,7 @@
                 </div>
             </div>
 
-            <!-- Canvas Container -->
+            <!-- Canvas Viewport -->
             <div class="relative w-full flex justify-center bg-gray-950 border border-gray-800/80 rounded-2xl p-2 overflow-hidden min-h-[380px] items-center shadow-2xl">
                 <div class="canvas-container" id="canvasContainer">
                     <canvas id="mainCanvas"></canvas>
@@ -133,8 +131,8 @@
             </div>
 
             <div class="flex items-center gap-2 text-xs text-gray-400 bg-gray-900/60 px-4 py-2 rounded-full border border-gray-800">
-                <i class="fa-solid fa-circle-info text-indigo-400"></i>
-                <span>Jahan CapCut ya text likha hai, <b>exact uspar red paint karein</b>. Fir Clean Watermark dabayein.</span>
+                <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                <span>Smart Neighbor Pixel Sampling: CapCut logo aaju-baaju ke color se replace ho jayega (blur box nahi rahega).</span>
             </div>
         </div>
 
@@ -148,7 +146,7 @@
             </div>
             <div>
                 <h3 class="text-xl font-bold">Select Export Quality</h3>
-                <p class="text-xs text-gray-400 mt-1">Apne hisab se resolution select karke download karein</p>
+                <p class="text-xs text-gray-400 mt-1">Apni pasand se quality choose karein</p>
             </div>
 
             <div class="space-y-3 pt-2">
@@ -159,7 +157,7 @@
 
                 <button id="dlLowBtn" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3 px-4 rounded-xl flex items-center justify-between transition-all border border-gray-700">
                     <span class="flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Fast Download (Low Quality)</span>
-                    <span class="text-xs bg-gray-900 px-2.5 py-1 rounded-md border border-gray-700 text-gray-400">480p / Small</span>
+                    <span class="text-xs bg-gray-900 px-2.5 py-1 rounded-md border border-gray-700 text-gray-400">480p</span>
                 </button>
             </div>
 
@@ -198,21 +196,20 @@
         const dlLowBtn = document.getElementById('dlLowBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
 
-        let mode = 'video'; // 'video' or 'photo'
+        let mode = 'video';
         let currentImage = null;
         let videoElement = null;
         let isDrawing = false;
         let animFrameId = null;
         let maskBounds = null;
 
-        // Mode Switching
         tabVideo.addEventListener('click', () => {
             mode = 'video';
             tabVideo.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 bg-indigo-600 text-white transition-all';
             tabPhoto.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all';
             fileInput.accept = 'video/*';
             uploadTitle.innerText = 'Video Choose Karein';
-            uploadSub.innerText = 'CapCut, Logo ya Text ko bilkul saaf hatayein (MP4, WebM)';
+            uploadSub.innerText = 'CapCut, Logo ya Text ko bilkul 100% saaf karein (MP4, WebM)';
         });
 
         tabPhoto.addEventListener('click', () => {
@@ -221,7 +218,7 @@
             tabVideo.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all';
             fileInput.accept = 'image/*';
             uploadTitle.innerText = 'Photo Choose Karein';
-            uploadSub.innerText = 'Photo me se kisi bhi watermark ya text ko saaf karein (JPG, PNG)';
+            uploadSub.innerText = 'Photo me se watermark ko bilkul saaf karein (JPG, PNG)';
         });
 
         brushSizeInput.addEventListener('input', (e) => {
@@ -356,7 +353,6 @@
             workspaceSection.classList.add('hidden');
         });
 
-        // REMOVAL PROCESS
         removeBtn.addEventListener('click', () => {
             if (!maskBounds) {
                 alert('Pehle text ya watermark par red color se paint karein!');
@@ -371,7 +367,7 @@
             nextDownloadBtn.classList.remove('hidden');
         });
 
-        // 1. Full Photo Erase Algorithm
+        // 1. Photo Inpainting (Multi-neighbor Pixel Synthesis)
         function cleanPhotoWatermark() {
             const w = mainCanvas.width;
             const h = mainCanvas.height;
@@ -390,8 +386,7 @@
             const src = mainData.data;
             const mask = maskData.data;
 
-            // Inpainting synthesis pass (Pixel Replacement)
-            for (let pass = 0; pass < 8; pass++) {
+            for (let pass = 0; pass < 12; pass++) {
                 for (let y = 1; y < bh - 1; y++) {
                     for (let x = 1; x < bw - 1; x++) {
                         const idx = (y * bw + x) * 4;
@@ -402,7 +397,7 @@
                                 const nx = x + neighbor[0];
                                 const ny = y + neighbor[1];
                                 const nIdx = (ny * bw + nx) * 4;
-                                if (mask[nIdx + 3] === 0 || pass > 2) {
+                                if (mask[nIdx + 3] === 0 || pass > 3) {
                                     rSum += src[nIdx];
                                     gSum += src[nIdx + 1];
                                     bSum += src[nIdx + 2];
@@ -422,7 +417,7 @@
             maskCtx.clearRect(0, 0, w, h);
         }
 
-        // 2. Full Video Erase Patch Algorithm
+        // 2. Video Smart Clone Patching (Samples clean adjacent pixels instead of blurring!)
         function cleanVideoWatermark() {
             if (animFrameId) cancelAnimationFrame(animFrameId);
 
@@ -435,30 +430,28 @@
             const bw = bx2 - bx1;
             const bh = by2 - by1;
 
-            const patchCanvas = document.createElement('canvas');
-            patchCanvas.width = bw;
-            patchCanvas.height = bh;
-            const patchCtx = patchCanvas.getContext('2d');
+            // Find offset for clean adjacent background area
+            let sampleY = by2 + 5;
+            if (sampleY + bh > h) {
+                sampleY = Math.max(0, by1 - bh - 5);
+            }
 
-            function renderCleanVideo() {
+            function renderCloneVideo() {
                 if (mode === 'video' && videoElement && !videoElement.paused) {
+                    // Draw full original video
                     mainCtx.drawImage(videoElement, 0, 0, w, h);
 
-                    // Crop exact painted area and apply dynamic pixel patch blending
-                    patchCtx.drawImage(videoElement, bx1, by1, bw, bh, 0, 0, bw, bh);
-                    patchCtx.filter = 'blur(16px) contrast(120%)';
-                    patchCtx.drawImage(patchCanvas, 0, 0);
-                    patchCtx.filter = 'none';
+                    // Clone clean background patch from adjacent area over the watermark
+                    mainCtx.drawImage(videoElement, bx1, sampleY, bw, bh, bx1, by1, bw, bh);
 
-                    mainCtx.drawImage(patchCanvas, bx1, by1, bw, bh);
-                    animFrameId = requestAnimationFrame(renderCleanVideo);
+                    animFrameId = requestAnimationFrame(renderCloneVideo);
                 }
             }
-            renderCleanVideo();
+            renderCloneVideo();
             maskCtx.clearRect(0, 0, w, h);
         }
 
-        // EXPORT & DOWNLOAD MODAL
+        // DOWNLOAD MODAL HANDLERS
         nextDownloadBtn.addEventListener('click', () => {
             qualityModal.classList.remove('hidden');
         });
@@ -475,7 +468,6 @@
             const link = document.createElement('a');
 
             if (qualityRatio < 1.0) {
-                // Low Quality resize canvas export
                 const tempCanvas = document.createElement('canvas');
                 tempCanvas.width = Math.round(mainCanvas.width * qualityRatio);
                 tempCanvas.height = Math.round(mainCanvas.height * qualityRatio);
@@ -485,7 +477,6 @@
                 link.download = `HYSI-REMOVER-Fast.${mode === 'photo' ? 'jpg' : 'png'}`;
                 link.href = tempCanvas.toDataURL('image/jpeg', 0.6);
             } else {
-                // Full HD Original Export
                 link.download = `HYSI-REMOVER-FullHD.${mode === 'photo' ? 'png' : 'png'}`;
                 link.href = mainCanvas.toDataURL('image/png', 1.0);
             }
