@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-Remover | Free Watermark & Text Remover</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .canvas-container {
+            position: relative;
+            display: inline-block;
+            max-width: 100%;
+            user-select: none;
+        }
+        canvas {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+        #maskCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col font-sans">
+
+    <!-- Header -->
+    <header class="border-b border-gray-800 bg-gray-950 px-6 py-4 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="bg-indigo-600 p-2 rounded-lg text-white">
+                <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-wide">V-Remover</h1>
+                <p class="text-xs text-gray-400">Free Instant Photo & Video Watermark Remover</p>
+            </div>
+        </div>
+        <div class="text-xs text-emerald-400 bg-emerald-950/60 border border-emerald-800 px-3 py-1 rounded-full flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> No Login • 100% Free
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 flex flex-col items-center justify-center p-4 max-w-6xl w-full mx-auto">
+
+        <!-- Upload Container -->
+        <div id="uploadSection" class="w-full max-w-xl border-2 border-dashed border-gray-700 hover:border-indigo-500 rounded-2xl p-8 text-center bg-gray-800/40 backdrop-blur transition-all cursor-pointer">
+            <input type="file" id="fileInput" accept="image/*,video/*" class="hidden">
+            <label for="fileInput" class="cursor-pointer flex flex-col items-center">
+                <div class="w-16 h-16 bg-indigo-600/20 text-indigo-400 rounded-full flex items-center justify-center mb-4">
+                    <i class="fa-solid fa-cloud-arrow-up text-3xl"></i>
+                </div>
+                <h2 class="text-lg font-semibold mb-1">Photo ya Video Yahan Upload Karein</h2>
+                <p class="text-sm text-gray-400 mb-4">JPG, PNG, WebP, MP4, WebM</p>
+                <span class="bg-indigo-600 hover:bg-indigo-500 text-white text-sm font-medium px-5 py-2.5 rounded-xl transition">Select File</span>
+            </label>
+        </div>
+
+        <!-- Workspace Container -->
+        <div id="workspaceSection" class="hidden w-full flex flex-col items-center space-y-4">
+            
+            <!-- Toolbar -->
+            <div class="bg-gray-800 border border-gray-700 rounded-2xl p-3 flex flex-wrap items-center justify-between gap-4 w-full">
+                <!-- Pen & Brush Controls -->
+                <div class="flex items-center space-x-3">
+                    <span class="text-xs text-gray-400 font-medium">Tools:</span>
+                    <button id="penBtn" class="flex items-center gap-2 bg-indigo-600 px-3.5 py-1.5 rounded-lg text-sm font-medium hover:bg-indigo-500 transition">
+                        <i class="fa-solid fa-pen"></i> Pen Tool
+                    </button>
+                    <div class="flex items-center gap-2 bg-gray-900 border border-gray-700 px-3 py-1 rounded-lg">
+                        <i class="fa-solid fa-circle-dot text-xs text-gray-400"></i>
+                        <span class="text-xs text-gray-300">Size:</span>
+                        <input type="range" id="brushSize" min="5" max="80" value="25" class="w-24 accent-indigo-500 cursor-pointer">
+                        <span id="brushSizeVal" class="text-xs w-6 text-gray-400">25px</span>
+                    </div>
+                    <button id="clearMaskBtn" class="text-xs bg-gray-700 hover:bg-gray-600 px-3 py-2 rounded-lg transition text-gray-300">
+                        <i class="fa-solid fa-rotate-left"></i> Clear Selection
+                    </button>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-3">
+                    <button id="removeBtn" class="flex items-center gap-2 bg-rose-600 hover:bg-rose-500 px-4 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-rose-900/30 transition">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Remove Watermark
+                    </button>
+                    <button id="downloadBtn" class="hidden flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 px-4 py-2 rounded-xl text-sm font-semibold shadow-lg shadow-emerald-900/30 transition">
+                        <i class="fa-solid fa-download"></i> Download
+                    </button>
+                    <button id="resetBtn" class="text-xs text-gray-400 hover:text-white px-2">
+                        <i class="fa-solid fa-arrow-left"></i> Change File
+                    </button>
+                </div>
+            </div>
+
+            <!-- Canvas Viewport -->
+            <div class="relative w-full flex justify-center bg-gray-950 border border-gray-800 rounded-2xl p-2 overflow-hidden min-h-[350px] items-center">
+                <div class="canvas-container" id="canvasContainer">
+                    <canvas id="mainCanvas"></canvas>
+                    <canvas id="maskCanvas"></canvas>
+                </div>
+                <video id="hiddenVideo" class="hidden" playsinline loop muted></video>
+            </div>
+
+            <p class="text-xs text-gray-500 text-center">Tip: Red colour se CapCut ya watermark ko mark karein, fir <b>Remove Watermark</b> button dabayein.</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-800 py-3 text-center text-xs text-gray-500">
+        V-Remover • Free Watermark Removal Tool
+    </footer>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const uploadSection = document.getElementById('uploadSection');
+        const workspaceSection = document.getElementById('workspaceSection');
+        
+        const mainCanvas = document.getElementById('mainCanvas');
+        const maskCanvas = document.getElementById('maskCanvas');
+        const hiddenVideo = document.getElementById('hiddenVideo');
+        const mainCtx = mainCanvas.getContext('2d');
+        const maskCtx = maskCanvas.getContext('2d');
+
+        const brushSizeInput = document.getElementById('brushSize');
+        const brushSizeVal = document.getElementById('brushSizeVal');
+        const clearMaskBtn = document.getElementById('clearMaskBtn');
+        const removeBtn = document.getElementById('removeBtn');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const resetBtn = document.getElementById('resetBtn');
+
+        let fileType = '';
+        let currentImage = null;
+        let isDrawing = false;
+        let animFrameId = null;
+
+        brushSizeInput.addEventListener('input', (e) => {
+            brushSizeVal.innerText = `${e.target.value}px`;
+        });
+
+        fileInput.addEventListener('change', handleFileSelect);
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            uploadSection.classList.add('hidden');
+            workspaceSection.classList.remove('hidden');
+            downloadBtn.classList.add('hidden');
+
+            if (file.type.startsWith('image/')) {
+                fileType = 'image';
+                const reader = new FileReader();
+                reader.onload = (evt) => {
+                    currentImage = new Image();
+                    currentImage.onload = () => {
+                        setupCanvas(currentImage.width, currentImage.height);
+                        mainCtx.drawImage(currentImage, 0, 0);
+                    };
+                    currentImage.src = evt.target.result;
+                };
+                reader.readAsDataURL(file);
+            } else if (file.type.startsWith('video/')) {
+                fileType = 'video';
+                hiddenVideo.src = URL.createObjectURL(file);
+                hiddenVideo.onloadedmetadata = () => {
+                    setupCanvas(hiddenVideo.videoWidth, hiddenVideo.videoHeight);
+                    hiddenVideo.play();
+                    renderVideoLoop();
+                };
+            }
+        }
+
+        function setupCanvas(width, height) {
+            const maxDim = 1280;
+            let scale = 1;
+            if (width > maxDim || height > maxDim) {
+                scale = Math.min(maxDim / width, maxDim / height);
+            }
+
+            const finalW = Math.round(width * scale);
+            const finalH = Math.round(height * scale);
+
+            mainCanvas.width = finalW;
+            mainCanvas.height = finalH;
+            maskCanvas.width = finalW;
+            maskCanvas.height = finalH;
+            maskCtx.clearRect(0, 0, finalW, finalH);
+        }
+
+        function renderVideoLoop() {
+            if (fileType === 'video' && !hiddenVideo.paused && !hiddenVideo.ended) {
+                mainCtx.drawImage(hiddenVideo, 0, 0, mainCanvas.width, mainCanvas.height);
+                animFrameId = requestAnimationFrame(renderVideoLoop);
+            }
+        }
+
+        function getCanvasCoords(e) {
+            const rect = maskCanvas.getBoundingClientRect();
+            const scaleX = maskCanvas.width / rect.width;
+            const scaleY = maskCanvas.height / rect.height;
+            return {
+                x: (e.clientX - rect.left) * scaleX,
+                y: (e.clientY - rect.top) * scaleY
+            };
+        }
+
+        maskCanvas.addEventListener('mousedown', (e) => { isDrawing = true; draw(e); });
+        maskCanvas.addEventListener('mousemove', draw);
+        maskCanvas.addEventListener('mouseup', () => isDrawing = false);
+        maskCanvas.addEventListener('mouseleave', () => isDrawing = false);
+
+        maskCanvas.addEventListener('touchstart', (e) => { isDrawing = true; draw(e.touches[0]); });
+        maskCanvas.addEventListener('touchmove', (e) => draw(e.touches[0]));
+        maskCanvas.addEventListener('touchend', () => isDrawing = false);
+
+        function draw(e) {
+            if (!isDrawing) return;
+            const pos = getCanvasCoords(e);
+            maskCtx.fillStyle = 'rgba(239, 68, 68, 0.7)';
+            maskCtx.beginPath();
+            maskCtx.arc(pos.x, pos.y, brushSizeInput.value / 2, 0, Math.PI * 2);
+            maskCtx.fill();
+        }
+
+        clearMaskBtn.addEventListener('click', () => {
+            maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            if (animFrameId) cancelAnimationFrame(animFrameId);
+            if (hiddenVideo.src) hiddenVideo.pause();
+            fileInput.value = '';
+            uploadSection.classList.remove('hidden');
+            workspaceSection.classList.add('hidden');
+        });
+
+        removeBtn.addEventListener('click', () => {
+            if (fileType === 'image') {
+                processImageInpainting();
+            } else if (fileType === 'video') {
+                processVideoInpainting();
+            }
+            downloadBtn.classList.remove('hidden');
+        });
+
+        function processImageInpainting() {
+            const w = mainCanvas.width;
+            const h = mainCanvas.height;
+            const mainData = mainCtx.getImageData(0, 0, w, h);
+            const maskData = maskCtx.getImageData(0, 0, w, h);
+            const src = mainData.data;
+            const mask = maskData.data;
+
+            const passes = 3;
+            for (let p = 0; p < passes; p++) {
+                for (let y = 1; y < h - 1; y++) {
+                    for (let x = 1; x < w - 1; x++) {
+                        const idx = (y * w + x) * 4;
+                        if (mask[idx + 3] > 0) {
+                            let rSum = 0, gSum = 0, bSum = 0, count = 0;
+                            const neighbors = [
+                                [-1, -1], [0, -1], [1, -1],
+                                [-1,  0],          [1,  0],
+                                [-1,  1], [0,  1], [1,  1]
+                            ];
+                            for (let n of neighbors) {
+                                const nx = x + n[0];
+                                const ny = y + n[1];
+                                const nIdx = (ny * w + nx) * 4;
+                                if (mask[nIdx + 3] === 0 || p > 0) {
+                                    rSum += src[nIdx];
+                                    gSum += src[nIdx + 1];
+                                    bSum += src[nIdx + 2];
+                                    count++;
+                                }
+                            }
+                            if (count > 0) {
+                                src[idx] = Math.round(rSum / count);
+                                src[idx + 1] = Math.round(gSum / count);
+                                src[idx + 2] = Math.round(bSum / count);
+                            }
+                        }
+                    }
+                }
+            }
+            mainCtx.putImageData(mainData, 0, 0);
+            maskCtx.clearRect(0, 0, w, h);
+        }
+
+        function processVideoInpainting() {
+            const w = mainCanvas.width;
+            const h = mainCanvas.height;
+
+            function renderProcessedVideo() {
+                if (!hiddenVideo.paused && !hiddenVideo.ended) {
+                    mainCtx.drawImage(hiddenVideo, 0, 0, w, h);
+                    mainCtx.save();
+                    mainCtx.filter = 'blur(10px)';
+                    mainCtx.drawImage(hiddenVideo, 0, 0, w, h);
+                    mainCtx.restore();
+                    animFrameId = requestAnimationFrame(renderProcessedVideo);
+                }
+            }
+            renderProcessedVideo();
+            maskCtx.clearRect(0, 0, w, h);
+        }
+
+        downloadBtn.addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = fileType === 'image' ? 'v-remover-photo.png' : 'v-remover-frame.png';
+            link.href = mainCanvas.toDataURL('image/png');
+            link.click();
+        });
+    </script>
+</body>
+</html>
