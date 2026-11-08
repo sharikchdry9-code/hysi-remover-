@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HYSI REMOVER | Smart Clone Patch Watermark Eraser</title>
+    <title>HYSI REMOVER STUDIO | Watermark, Crop & Filters</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -35,25 +35,25 @@
 </head>
 <body class="bg-gray-950 text-white min-h-screen flex flex-col font-sans selection:bg-indigo-500 selection:text-white">
 
-    <!-- Header -->
+    <!-- Header with NEW Dynamic Sparkle/Film Logo -->
     <header class="border-b border-gray-800 bg-gray-900/90 backdrop-blur-md sticky top-0 z-50 px-6 py-3.5 flex items-center justify-between">
         <div class="flex items-center space-x-3">
-            <div class="bg-gradient-to-tr from-indigo-600 to-violet-500 p-2.5 rounded-xl text-white shadow-lg shadow-indigo-500/30 flex items-center justify-center">
-                <i class="fa-solid fa-scissors text-2xl -rotate-45"></i>
+            <div class="bg-gradient-to-tr from-cyan-500 via-indigo-600 to-fuchsia-600 p-2.5 rounded-2xl text-white shadow-lg shadow-indigo-500/30 flex items-center justify-center">
+                <i class="fa-solid fa-wand-magic-sparkles text-2xl animate-pulse"></i>
             </div>
             <div>
                 <div class="flex items-center gap-2">
-                    <h1 class="text-xl font-extrabold tracking-wider bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">HYSI REMOVER</h1>
-                    <span class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">CLONE PRO HD</span>
+                    <h1 class="text-xl font-black tracking-wider bg-gradient-to-r from-cyan-400 via-indigo-400 to-fuchsia-400 bg-clip-text text-transparent">HYSI STUDIO</h1>
+                    <span class="text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-bold px-2 py-0.5 rounded-full uppercase tracking-widest">ULTRA MP4 & HD</span>
                 </div>
-                <p class="text-xs text-gray-400">100% Seamless Watermark & Text Removal</p>
+                <p class="text-xs text-gray-400">Clean Removal • Video & Photo Crop • Live Filters • Real MP4 Video Export</p>
             </div>
         </div>
 
         <div class="flex items-center gap-3">
-            <div class="hidden sm:flex items-center gap-2 text-xs text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-3 py-1.5 rounded-full">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Free • No Login
-            </div>
+            <button id="openGalleryNav" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-xs px-3.5 py-2 rounded-xl border border-gray-700 transition">
+                <i class="fa-solid fa-photo-film text-indigo-400"></i> Downloads Gallery (<span id="galleryCountNav">0</span>)
+            </button>
         </div>
     </header>
 
@@ -65,10 +65,10 @@
             
             <div class="flex bg-gray-900 border border-gray-800 p-1.5 rounded-2xl mb-6 w-full max-w-md">
                 <button id="tabVideo" class="flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 bg-indigo-600 text-white transition-all">
-                    <i class="fa-solid fa-video"></i> Video Remover
+                    <i class="fa-solid fa-film"></i> Video Studio
                 </button>
                 <button id="tabPhoto" class="flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all">
-                    <i class="fa-solid fa-image"></i> Photo Remover
+                    <i class="fa-solid fa-image"></i> Photo Studio
                 </button>
             </div>
 
@@ -76,12 +76,12 @@
                 <input type="file" id="fileInput" accept="video/*" class="hidden">
                 <label for="fileInput" class="cursor-pointer flex flex-col items-center">
                     <div class="w-20 h-20 bg-indigo-600/15 border border-indigo-500/30 text-indigo-400 rounded-2xl flex items-center justify-center mb-5 shadow-inner group">
-                        <i class="fa-solid fa-scissors text-4xl -rotate-45 text-indigo-400 group-hover:scale-110 transition-transform"></i>
+                        <i class="fa-solid fa-wand-magic-sparkles text-4xl text-indigo-400 group-hover:scale-110 transition-transform"></i>
                     </div>
                     <h2 id="uploadTitle" class="text-xl font-bold mb-2">Video Choose Karein</h2>
-                    <p id="uploadSub" class="text-sm text-gray-400 mb-6 max-w-xs">CapCut, Logo ya Text ko bilkul 100% saaf karein</p>
+                    <p id="uploadSub" class="text-sm text-gray-400 mb-6 max-w-xs">Watermark Remover, Video Crop, Filter & Full MP4 Video Export</p>
                     <span class="btn-glow bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 text-white font-semibold text-sm px-7 py-3 rounded-xl transition-all flex items-center gap-2">
-                        <i class="fa-solid fa-folder-open"></i> Select File
+                        <i class="fa-solid fa-folder-open"></i> Select Media File
                     </span>
                 </label>
             </div>
@@ -93,27 +93,48 @@
             <!-- Toolbar -->
             <div class="bg-gray-900/90 border border-gray-800 backdrop-blur-md rounded-2xl p-3 flex flex-wrap items-center justify-between gap-4 w-full shadow-xl">
                 
-                <!-- Tools -->
+                <!-- Tools Selection -->
                 <div class="flex items-center space-x-3">
-                    <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Brush:</span>
+                    <span class="text-xs text-gray-400 font-semibold uppercase tracking-wider">Tools:</span>
+                    
+                    <!-- Brush Controls -->
                     <div class="flex items-center gap-2 bg-gray-950 border border-gray-800 px-3 py-1.5 rounded-xl">
                         <i class="fa-solid fa-paint-brush text-xs text-indigo-400"></i>
-                        <input type="range" id="brushSize" min="5" max="90" value="25" class="w-24 accent-indigo-500 cursor-pointer">
-                        <span id="brushSizeVal" class="text-xs w-7 text-indigo-300 font-mono">25px</span>
+                        <input type="range" id="brushSize" min="5" max="90" value="25" class="w-20 accent-indigo-500 cursor-pointer">
+                        <span id="brushSizeVal" class="text-xs w-6 text-indigo-300 font-mono">25px</span>
                     </div>
-                    <button id="clearMaskBtn" class="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3.5 py-2 rounded-xl transition text-gray-300 flex items-center gap-1.5">
+
+                    <!-- Crop Option -->
+                    <button id="cropToggleBtn" class="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-2 rounded-xl transition text-gray-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-crop-simple text-indigo-400"></i> Crop Aspect
+                    </button>
+
+                    <!-- Filter Selector -->
+                    <div class="flex items-center gap-1.5 bg-gray-950 border border-gray-800 px-2.5 py-1.5 rounded-xl">
+                        <i class="fa-solid fa-sliders text-xs text-indigo-400"></i>
+                        <select id="filterSelect" class="bg-transparent text-xs text-gray-200 outline-none cursor-pointer">
+                            <option value="none">Normal Filter</option>
+                            <option value="vibrant">Vibrant HD</option>
+                            <option value="warm">Warm Film</option>
+                            <option value="cool">Cool Tone</option>
+                            <option value="bw">B&W Classic</option>
+                            <option value="contrast">High Contrast</option>
+                        </select>
+                    </div>
+
+                    <button id="clearMaskBtn" class="text-xs bg-gray-800 hover:bg-gray-700 border border-gray-700 px-3 py-2 rounded-xl transition text-gray-300">
                         <i class="fa-solid fa-rotate-left"></i> Reset Selection
                     </button>
                 </div>
 
                 <!-- Action Controls -->
                 <div class="flex items-center space-x-3">
-                    <button id="removeBtn" class="flex items-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-rose-950/40 transition-all active:scale-95">
-                        <i class="fa-solid fa-scissors"></i> 100% Clean Remove
+                    <button id="removeBtn" class="flex items-center gap-2 bg-gradient-to-r from-rose-600 to-pink-600 hover:from-rose-500 hover:to-pink-500 px-4 py-2 rounded-xl text-sm font-bold shadow-lg shadow-rose-950/40 transition-all active:scale-95">
+                        <i class="fa-solid fa-scissors"></i> Clean Watermark
                     </button>
 
-                    <button id="nextDownloadBtn" class="hidden flex items-center gap-2 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-indigo-950/40 transition-all active:scale-95">
-                        <i class="fa-solid fa-arrow-right"></i> Next: Export Quality
+                    <button id="nextDownloadBtn" class="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 px-5 py-2 rounded-xl text-sm font-bold shadow-lg shadow-emerald-950/40 transition-all active:scale-95">
+                        <i class="fa-solid fa-download"></i> Download Full Output
                     </button>
 
                     <button id="resetBtn" class="text-xs text-gray-400 hover:text-white px-2 py-1 flex items-center gap-1">
@@ -132,31 +153,44 @@
 
             <div class="flex items-center gap-2 text-xs text-gray-400 bg-gray-900/60 px-4 py-2 rounded-full border border-gray-800">
                 <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                <span>Smart Neighbor Pixel Sampling: CapCut logo aaju-baaju ke color se replace ho jayega (blur box nahi rahega).</span>
+                <span>Watermark par red paint karein, crop ya filter set karein, fir Download karein (Real MP4 video & HD photo ready).</span>
             </div>
         </div>
 
     </main>
 
-    <!-- Download Quality Modal -->
-    <div id="qualityModal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <!-- Download Quality & Render Modal -->
+    <div id="qualityModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
         <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-md w-full text-center space-y-5 shadow-2xl">
-            <div class="w-14 h-14 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-2xl">
-                <i class="fa-solid fa-download"></i>
+            <div class="w-14 h-14 bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 rounded-2xl flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-file-video"></i>
             </div>
             <div>
-                <h3 class="text-xl font-bold">Select Export Quality</h3>
-                <p class="text-xs text-gray-400 mt-1">Apni pasand se quality choose karein</p>
+                <h3 id="modalTitle" class="text-xl font-bold">Export Media File</h3>
+                <p class="text-xs text-gray-400 mt-1">Full Video / Photo Download Process</p>
             </div>
 
-            <div class="space-y-3 pt-2">
+            <!-- Video Progress Bar -->
+            <div id="renderProgressBox" class="hidden space-y-2">
+                <div class="flex justify-between text-xs text-gray-300">
+                    <span>Rendering Video Media...</span>
+                    <span id="renderPercent" class="font-mono text-indigo-400 font-bold">0%</span>
+                </div>
+                <div class="w-full bg-gray-800 h-3 rounded-full overflow-hidden border border-gray-700">
+                    <div id="renderProgressBar" class="bg-gradient-to-r from-indigo-500 to-fuchsia-500 h-full w-0 transition-all duration-150"></div>
+                </div>
+                <p class="text-[11px] text-gray-400 italic">Please wait while full MP4 video render completes...</p>
+            </div>
+
+            <!-- Export Buttons -->
+            <div id="modalButtons" class="space-y-3 pt-2">
                 <button id="dlHdBtn" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-between transition-all shadow-lg shadow-emerald-950/40">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> Full HD Quality (Original)</span>
-                    <span class="text-xs bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-700">1080p</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i> Full HD Quality (Original Resolution)</span>
+                    <span class="text-xs bg-emerald-950/80 px-2.5 py-1 rounded-md border border-emerald-700">HD MP4/PNG</span>
                 </button>
 
                 <button id="dlLowBtn" class="w-full bg-gray-800 hover:bg-gray-700 text-gray-200 font-semibold py-3 px-4 rounded-xl flex items-center justify-between transition-all border border-gray-700">
-                    <span class="flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Fast Download (Low Quality)</span>
+                    <span class="flex items-center gap-2"><i class="fa-solid fa-bolt"></i> Fast Download (Compressed)</span>
                     <span class="text-xs bg-gray-900 px-2.5 py-1 rounded-md border border-gray-700 text-gray-400">480p</span>
                 </button>
             </div>
@@ -165,9 +199,26 @@
         </div>
     </div>
 
+    <!-- Gallery Drawer / Modal -->
+    <div id="galleryModal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-gray-900 border border-gray-800 rounded-3xl p-6 max-w-2xl w-full space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-photo-film text-indigo-400 text-xl"></i>
+                    <h3 class="text-lg font-bold">Saved Downloads Gallery</h3>
+                </div>
+                <button id="closeGalleryBtn" class="text-gray-400 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="galleryContainer" class="flex-1 overflow-y-auto grid grid-cols-2 sm:grid-cols-3 gap-3 p-1">
+                <!-- Gallery items injected here -->
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-gray-900 py-4 text-center text-xs text-gray-500">
-        HYSI REMOVER • High-Precision Photo & Video Watermark Eraser
+        HYSI STUDIO • Watermark Remover, Video Crop & Live Filters Engine
     </footer>
 
     <script>
@@ -186,6 +237,8 @@
 
         const brushSizeInput = document.getElementById('brushSize');
         const brushSizeVal = document.getElementById('brushSizeVal');
+        const cropToggleBtn = document.getElementById('cropToggleBtn');
+        const filterSelect = document.getElementById('filterSelect');
         const clearMaskBtn = document.getElementById('clearMaskBtn');
         const removeBtn = document.getElementById('removeBtn');
         const nextDownloadBtn = document.getElementById('nextDownloadBtn');
@@ -195,6 +248,16 @@
         const dlHdBtn = document.getElementById('dlHdBtn');
         const dlLowBtn = document.getElementById('dlLowBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
+        const modalButtons = document.getElementById('modalButtons');
+        const renderProgressBox = document.getElementById('renderProgressBox');
+        const renderProgressBar = document.getElementById('renderProgressBar');
+        const renderPercent = document.getElementById('renderPercent');
+
+        const galleryModal = document.getElementById('galleryModal');
+        const openGalleryNav = document.getElementById('openGalleryNav');
+        const closeGalleryBtn = document.getElementById('closeGalleryBtn');
+        const galleryContainer = document.getElementById('galleryContainer');
+        const galleryCountNav = document.getElementById('galleryCountNav');
 
         let mode = 'video';
         let currentImage = null;
@@ -202,6 +265,15 @@
         let isDrawing = false;
         let animFrameId = null;
         let maskBounds = null;
+        let isWatermarkRemoved = false;
+        let currentFilter = 'none';
+
+        // Crop state
+        let cropMode = 0;
+        const cropRatios = [null, 16/9, 9/16, 1/1];
+        const cropNames = ["Crop Aspect", "Crop 16:9", "Crop 9:16", "Crop 1:1"];
+
+        let savedGallery = [];
 
         tabVideo.addEventListener('click', () => {
             mode = 'video';
@@ -209,7 +281,7 @@
             tabPhoto.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all';
             fileInput.accept = 'video/*';
             uploadTitle.innerText = 'Video Choose Karein';
-            uploadSub.innerText = 'CapCut, Logo ya Text ko bilkul 100% saaf karein (MP4, WebM)';
+            uploadSub.innerText = 'Watermark Remover, Video Crop, Filter & Full MP4 Export';
         });
 
         tabPhoto.addEventListener('click', () => {
@@ -218,12 +290,38 @@
             tabVideo.className = 'flex-1 py-2.5 rounded-xl text-sm font-semibold flex items-center justify-center gap-2 text-gray-400 hover:text-white transition-all';
             fileInput.accept = 'image/*';
             uploadTitle.innerText = 'Photo Choose Karein';
-            uploadSub.innerText = 'Photo me se watermark ko bilkul saaf karein (JPG, PNG)';
+            uploadSub.innerText = 'Photo Watermark Remover, Crop & Filters (JPG, PNG)';
         });
 
         brushSizeInput.addEventListener('input', (e) => {
             brushSizeVal.innerText = `${e.target.value}px`;
         });
+
+        cropToggleBtn.addEventListener('click', () => {
+            cropMode = (cropMode + 1) % cropRatios.length;
+            cropToggleBtn.innerHTML = `<i class="fa-solid fa-crop-simple text-indigo-400"></i> ${cropNames[cropMode]}`;
+            if (mode === 'photo' && currentImage) {
+                setupCanvas(currentImage.width, currentImage.height);
+                mainCtx.drawImage(currentImage, 0, 0, mainCanvas.width, mainCanvas.height);
+            } else if (mode === 'video' && videoElement) {
+                setupCanvas(videoElement.videoWidth, videoElement.videoHeight);
+            }
+        });
+
+        filterSelect.addEventListener('change', (e) => {
+            currentFilter = e.target.value;
+        });
+
+        function getFilterStyle(filter) {
+            switch(filter) {
+                case 'vibrant': return 'saturate(160%) contrast(110%)';
+                case 'warm': return 'sepia(30%) saturate(140%) brightness(105%)';
+                case 'cool': return 'hue-rotate(30deg) saturate(120%)';
+                case 'bw': return 'grayscale(100%) contrast(120%)';
+                case 'contrast': return 'contrast(150%) brightness(95%)';
+                default: return 'none';
+            }
+        }
 
         fileInput.addEventListener('change', handleFileSelect);
 
@@ -233,8 +331,8 @@
 
             uploadSection.classList.add('hidden');
             workspaceSection.classList.remove('hidden');
-            nextDownloadBtn.classList.add('hidden');
             maskBounds = null;
+            isWatermarkRemoved = false;
 
             if (mode === 'photo') {
                 const reader = new FileReader();
@@ -242,7 +340,9 @@
                     currentImage = new Image();
                     currentImage.onload = () => {
                         setupCanvas(currentImage.width, currentImage.height);
+                        mainCtx.filter = getFilterStyle(currentFilter);
                         mainCtx.drawImage(currentImage, 0, 0, mainCanvas.width, mainCanvas.height);
+                        mainCtx.filter = 'none';
                     };
                     currentImage.src = evt.target.result;
                 };
@@ -266,14 +366,28 @@
             }
         }
 
-        function setupCanvas(w, h) {
-            const maxDim = 1920;
-            let scale = 1;
-            if (w > maxDim || h > maxDim) {
-                scale = Math.min(maxDim / w, maxDim / h);
+        function setupCanvas(origW, origH) {
+            const maxDim = 1280;
+            let targetW = origW;
+            let targetH = origH;
+
+            const targetRatio = cropRatios[cropMode];
+            if (targetRatio) {
+                const currentRatio = origW / origH;
+                if (currentRatio > targetRatio) {
+                    targetW = origH * targetRatio;
+                } else {
+                    targetH = origW / targetRatio;
+                }
             }
-            const finalW = Math.round(w * scale);
-            const finalH = Math.round(h * scale);
+
+            let scale = 1;
+            if (targetW > maxDim || targetH > maxDim) {
+                scale = Math.min(maxDim / targetW, maxDim / targetH);
+            }
+
+            const finalW = Math.round(targetW * scale);
+            const finalH = Math.round(targetH * scale);
 
             mainCanvas.width = finalW;
             mainCanvas.height = finalH;
@@ -287,11 +401,40 @@
             if (animFrameId) cancelAnimationFrame(animFrameId);
             function loop() {
                 if (mode === 'video' && videoElement && !videoElement.paused) {
-                    mainCtx.drawImage(videoElement, 0, 0, mainCanvas.width, mainCanvas.height);
+                    renderVideoFrame();
                     animFrameId = requestAnimationFrame(loop);
                 }
             }
             loop();
+        }
+
+        function renderVideoFrame() {
+            mainCtx.filter = getFilterStyle(currentFilter);
+            mainCtx.drawImage(videoElement, 0, 0, mainCanvas.width, mainCanvas.height);
+            mainCtx.filter = 'none';
+
+            if (isWatermarkRemoved && maskBounds) {
+                applyVideoClonePatch();
+            }
+        }
+
+        function applyVideoClonePatch() {
+            const w = mainCanvas.width;
+            const h = mainCanvas.height;
+            const bx1 = Math.floor(maskBounds.minX);
+            const by1 = Math.floor(maskBounds.minY);
+            const bx2 = Math.ceil(maskBounds.maxX);
+            const by2 = Math.ceil(maskBounds.maxY);
+            const bw = bx2 - bx1;
+            const bh = by2 - by1;
+
+            if (bw <= 0 || bh <= 0) return;
+
+            let sampleY = by2 + 5;
+            if (sampleY + bh > h) {
+                sampleY = Math.max(0, by1 - bh - 5);
+            }
+            mainCtx.drawImage(mainCanvas, bx1, sampleY, bw, bh, bx1, by1, bw, bh);
         }
 
         function getCanvasCoords(e) {
@@ -342,6 +485,7 @@
         clearMaskBtn.addEventListener('click', () => {
             maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
             maskBounds = null;
+            isWatermarkRemoved = false;
         });
 
         resetBtn.addEventListener('click', () => {
@@ -349,25 +493,25 @@
             if (videoElement) videoElement.pause();
             fileInput.value = '';
             maskBounds = null;
+            isWatermarkRemoved = false;
             uploadSection.classList.remove('hidden');
             workspaceSection.classList.add('hidden');
         });
 
         removeBtn.addEventListener('click', () => {
             if (!maskBounds) {
-                alert('Pehle text ya watermark par red color se paint karein!');
+                alert('Pehle text ya watermark par red color se mark karein!');
                 return;
             }
 
             if (mode === 'photo') {
                 cleanPhotoWatermark();
             } else {
-                cleanVideoWatermark();
+                isWatermarkRemoved = true;
             }
-            nextDownloadBtn.classList.remove('hidden');
+            maskCtx.clearRect(0, 0, maskCanvas.width, maskCanvas.height);
         });
 
-        // 1. Photo Inpainting (Multi-neighbor Pixel Synthesis)
         function cleanPhotoWatermark() {
             const w = mainCanvas.width;
             const h = mainCanvas.height;
@@ -414,45 +558,11 @@
                 }
             }
             mainCtx.putImageData(mainData, bx1, by1);
-            maskCtx.clearRect(0, 0, w, h);
         }
 
-        // 2. Video Smart Clone Patching (Samples clean adjacent pixels instead of blurring!)
-        function cleanVideoWatermark() {
-            if (animFrameId) cancelAnimationFrame(animFrameId);
-
-            const w = mainCanvas.width;
-            const h = mainCanvas.height;
-            const bx1 = Math.floor(maskBounds.minX);
-            const by1 = Math.floor(maskBounds.minY);
-            const bx2 = Math.ceil(maskBounds.maxX);
-            const by2 = Math.ceil(maskBounds.maxY);
-            const bw = bx2 - bx1;
-            const bh = by2 - by1;
-
-            // Find offset for clean adjacent background area
-            let sampleY = by2 + 5;
-            if (sampleY + bh > h) {
-                sampleY = Math.max(0, by1 - bh - 5);
-            }
-
-            function renderCloneVideo() {
-                if (mode === 'video' && videoElement && !videoElement.paused) {
-                    // Draw full original video
-                    mainCtx.drawImage(videoElement, 0, 0, w, h);
-
-                    // Clone clean background patch from adjacent area over the watermark
-                    mainCtx.drawImage(videoElement, bx1, sampleY, bw, bh, bx1, by1, bw, bh);
-
-                    animFrameId = requestAnimationFrame(renderCloneVideo);
-                }
-            }
-            renderCloneVideo();
-            maskCtx.clearRect(0, 0, w, h);
-        }
-
-        // DOWNLOAD MODAL HANDLERS
         nextDownloadBtn.addEventListener('click', () => {
+            modalButtons.classList.remove('hidden');
+            renderProgressBox.classList.add('hidden');
             qualityModal.classList.remove('hidden');
         });
 
@@ -460,28 +570,137 @@
             qualityModal.classList.add('hidden');
         });
 
-        dlHdBtn.addEventListener('click', () => downloadResult(1.0));
-        dlLowBtn.addEventListener('click', () => downloadResult(0.5));
+        dlHdBtn.addEventListener('click', () => processDownload(1.0));
+        dlLowBtn.addEventListener('click', () => processDownload(0.5));
 
-        function downloadResult(qualityRatio) {
-            qualityModal.classList.add('hidden');
-            const link = document.createElement('a');
+        function processDownload(qualityRatio) {
+            if (mode === 'photo') {
+                const link = document.createElement('a');
+                const dataUrl = mainCanvas.toDataURL('image/png', qualityRatio);
+                link.download = `HYSI-Photo-${Date.now()}.png`;
+                link.href = dataUrl;
+                link.click();
 
-            if (qualityRatio < 1.0) {
-                const tempCanvas = document.createElement('canvas');
-                tempCanvas.width = Math.round(mainCanvas.width * qualityRatio);
-                tempCanvas.height = Math.round(mainCanvas.height * qualityRatio);
-                const tempCtx = tempCanvas.getContext('2d');
-                tempCtx.drawImage(mainCanvas, 0, 0, tempCanvas.width, tempCanvas.height);
-                
-                link.download = `HYSI-REMOVER-Fast.${mode === 'photo' ? 'jpg' : 'png'}`;
-                link.href = tempCanvas.toDataURL('image/jpeg', 0.6);
-            } else {
-                link.download = `HYSI-REMOVER-FullHD.${mode === 'photo' ? 'png' : 'png'}`;
-                link.href = mainCanvas.toDataURL('image/png', 1.0);
+                addToGallery(dataUrl, 'photo');
+                qualityModal.classList.add('hidden');
+            } else if (mode === 'video') {
+                exportFullVideoMP4(qualityRatio);
             }
-            link.click();
         }
+
+        function exportFullVideoMP4(qualityRatio) {
+            modalButtons.classList.add('hidden');
+            renderProgressBox.classList.remove('hidden');
+            renderProgressBar.style.width = '0%';
+            renderPercent.innerText = '0%';
+
+            const stream = mainCanvas.captureStream(30);
+            
+            if (videoElement.captureStream) {
+                const vidStream = videoElement.captureStream();
+                const audioTracks = vidStream.getAudioTracks();
+                if (audioTracks.length > 0) {
+                    stream.addTrack(audioTracks[0]);
+                }
+            } else if (videoElement.mozCaptureStream) {
+                const vidStream = videoElement.mozCaptureStream();
+                const audioTracks = vidStream.getAudioTracks();
+                if (audioTracks.length > 0) {
+                    stream.addTrack(audioTracks[0]);
+                }
+            }
+
+            let mimeType = 'video/webm;codecs=vp9';
+            if (!MediaRecorder.isTypeSupported(mimeType)) {
+                mimeType = 'video/webm';
+            }
+
+            const mediaRecorder = new MediaRecorder(stream, { mimeType: mimeType });
+            const chunks = [];
+
+            mediaRecorder.ondataavailable = (e) => {
+                if (e.data.size > 0) chunks.push(e.data);
+            };
+
+            mediaRecorder.onstop = () => {
+                const blob = new Blob(chunks, { type: 'video/mp4' });
+                const videoUrl = URL.createObjectURL(blob);
+                
+                const link = document.createElement('a');
+                link.download = `HYSI-Video-${Date.now()}.mp4`;
+                link.href = videoUrl;
+                link.click();
+
+                addToGallery(videoUrl, 'video');
+
+                qualityModal.classList.add('hidden');
+                videoElement.currentTime = 0;
+                videoElement.play();
+            };
+
+            videoElement.currentTime = 0;
+            videoElement.play();
+            mediaRecorder.start();
+
+            const duration = videoElement.duration || 10;
+            const interval = setInterval(() => {
+                if (videoElement.paused || videoElement.ended || videoElement.currentTime >= duration) {
+                    clearInterval(interval);
+                    mediaRecorder.stop();
+                } else {
+                    const pct = Math.round((videoElement.currentTime / duration) * 100);
+                    renderProgressBar.style.width = `${pct}%`;
+                    renderPercent.innerText = `${pct}%`;
+                }
+            }, 100);
+        }
+
+        function addToGallery(url, type) {
+            savedGallery.unshift({ url, type, time: new Date().toLocaleTimeString() });
+            galleryCountNav.innerText = savedGallery.length;
+            renderGalleryItems();
+        }
+
+        function renderGalleryItems() {
+            galleryContainer.innerHTML = '';
+            if (savedGallery.length === 0) {
+                galleryContainer.innerHTML = '<p class="text-xs text-gray-500 col-span-3 text-center py-8">Abhi tak koi file download nahi hui hai.</p>';
+                return;
+            }
+
+            savedGallery.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'bg-gray-950 border border-gray-800 p-2 rounded-2xl flex flex-col space-y-2';
+                
+                if (item.type === 'photo') {
+                    card.innerHTML = `
+                        <img src="${item.url}" class="w-full h-24 object-cover rounded-xl border border-gray-800">
+                        <div class="flex items-center justify-between px-1">
+                            <span class="text-[10px] text-gray-400">Photo • ${item.time}</span>
+                            <a href="${item.url}" download="Gallery-Photo-${index}.png" class="text-xs text-indigo-400 hover:text-indigo-300"><i class="fa-solid fa-download"></i></a>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <video src="${item.url}" class="w-full h-24 object-cover rounded-xl border border-gray-800" muted loop autoplay></video>
+                        <div class="flex items-center justify-between px-1">
+                            <span class="text-[10px] text-gray-400">Video MP4 • ${item.time}</span>
+                            <a href="${item.url}" download="Gallery-Video-${index}.mp4" class="text-xs text-indigo-400 hover:text-indigo-300"><i class="fa-solid fa-download"></i></a>
+                        </div>
+                    `;
+                }
+                galleryContainer.appendChild(card);
+            });
+        }
+
+        openGalleryNav.addEventListener('click', () => {
+            renderGalleryItems();
+            galleryModal.classList.remove('hidden');
+        });
+
+        closeGalleryBtn.addEventListener('click', () => {
+            galleryModal.classList.add('hidden');
+        });
     </script>
 </body>
 </html>
